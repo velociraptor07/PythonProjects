@@ -12,6 +12,7 @@ class ContactManager:
         self.contacts = []
 
     def add_contact(self, name, phone, email):
+<<<<<<< HEAD
         # Email validation from branch2
         if '@' not in email or '.' not in email:
             print("Invalid email address. Please provide a valid email.")
@@ -28,6 +29,14 @@ class ContactManager:
             return
         
         # Ask for confirmation before adding the contact
+=======
+        if not phone.isdigit():
+            print("Phone number must contain only digits.")
+            return
+        if any(contact.phone == phone for contact in self.contacts):
+            print(f"A contact with the phone number '{phone}' already exists.")
+            return
+>>>>>>> 6c5f862ff2959a0e8a77ef7a9c0fe5b4aa3a945e
         confirm = input(f"Are you sure you want to add '{name}'? (y/n): ").lower()
         if confirm == 'y':
             new_contact = Contact(name, phone, email)
