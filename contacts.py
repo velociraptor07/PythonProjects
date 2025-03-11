@@ -11,6 +11,11 @@ class ContactManager:
     def __init__(self):
         self.contacts = []
 
+    def add_contact(self, name, phone, email):
+        new_contact = Contact(name, phone, email)
+        self.contacts.append(new_contact)
+        print(f"Contact '{name}' added successfully.")
+
     def view_contacts(self):
         if not self.contacts:
             print("No contacts to display.")
