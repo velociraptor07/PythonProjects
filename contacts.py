@@ -11,10 +11,12 @@ class ContactManager:
     def __init__(self):
         self.contacts = []
 
-    def add_contact(self, name, phone, email):
-        new_contact = Contact(name, phone, email)
-        self.contacts.append(new_contact)
-        print(f"Contact '{name}' added successfully.")
+    def delete_contact(self, index):
+        if 0 <= index < len(self.contacts):
+            deleted_contact = self.contacts.pop(index)
+            print(f"Contact '{deleted_contact.name}' has been deleted.")
+        else:
+            print("Invalid index. Contact not found.")
 
     def view_contacts(self):
         if not self.contacts:
@@ -42,7 +44,7 @@ def menu():
     cm = ContactManager()
     while True:
         print("\n*** Contact Manager ***")
-        print("1. Add New Contact")
+        print("1. Delete Contact")
         print("2. View All Contacts")
         print("3. Search for Contact")
         print("4. Exit")
@@ -50,10 +52,12 @@ def menu():
         choice = input("Choose an option (1-4): ")
 
         if choice == '1':
-            name = input("Enter name: ")
-            phone = input("Enter phone number: ")
-            email = input("Enter email address: ")
-            cm.add_contact(name, phone, email)
+            cm.view_contacts()  # Show contacts before deletion
+            try:
+                index = int(input("Enter the index of the contact to delete: ")) - 1
+                cm.delete_contact(index)
+            except ValueError:
+                print("Invalid input. Please enter a valid index.")
         elif choice == '2':
             cm.view_contacts()
         elif choice == '3':
