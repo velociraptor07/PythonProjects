@@ -12,6 +12,9 @@ class ContactManager:
         self.contacts = []
 
     def add_contact(self, name, phone, email):
+        if '@' not in email or '.' not in email:
+            print("Invalid email address. Please provide a valid email.")
+            return
         if any(contact.phone == phone for contact in self.contacts):
             print(f"A contact with the phone number '{phone}' already exists.")
             return
@@ -27,6 +30,7 @@ class ContactManager:
             for idx, contact in enumerate(self.contacts, start=1):
                 print(f"{idx}. {contact}")
             print("--------------------")
+            print(f"Total Contacts: {len(self.contacts)}")
 
     def search_contact(self, keyword):
         found_contacts = [contact for contact in self.contacts if keyword.lower() in contact.name.lower() or keyword in contact.phone]
