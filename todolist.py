@@ -1,15 +1,16 @@
 class Task:
-    def __init__(self, title, description):
+    def __init__(self, title, description, priority="Medium"):
         self.title = title
         self.description = description
         self.completed = False
+        self.priority = priority
 
     def mark_completed(self):
         self.completed = True
 
     def __str__(self):
         status = "Completed" if self.completed else "Pending"
-        return f"Task: {self.title}\nDescription: {self.description}\nStatus: {status}"
+        return f"Task: {self.title}\nDescription: {self.description}\nPriority: {self.priority}\nStatus: {status}"
 
 
 class ToDoList:
@@ -60,7 +61,8 @@ def main():
         if choice == "1":
             title = input("Enter the task title: ")
             description = input("Enter the task description: ")
-            task = Task(title, description)
+            priority = input("Enter task priority (Low/Medium/High): ").capitalize()
+            task = Task(title, description, priority)
             todo_list.add_task(task)
         elif choice == "2":
             title = input("Enter the title of the task to remove: ")
