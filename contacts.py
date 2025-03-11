@@ -11,12 +11,19 @@ class ContactManager:
     def __init__(self):
         self.contacts = []
 
+    # Add the delete_contact function
     def delete_contact(self, index):
         if 0 <= index < len(self.contacts):
             deleted_contact = self.contacts.pop(index)
             print(f"Contact '{deleted_contact.name}' has been deleted.")
         else:
             print("Invalid index. Contact not found.")
+
+    # Add the add_contact function (this was from the add contact branch)
+    def add_contact(self, name, phone, email):
+        new_contact = Contact(name, phone, email)
+        self.contacts.append(new_contact)
+        print(f"Contact '{name}' added successfully.")
 
     def view_contacts(self):
         if not self.contacts:
@@ -39,6 +46,7 @@ class ContactManager:
                 print(contact)
         else:
             print(f"No contacts found with keyword '{keyword}'.")
+
 
 def menu():
     cm = ContactManager()
