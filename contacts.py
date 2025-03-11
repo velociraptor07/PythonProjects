@@ -11,18 +11,6 @@ class ContactManager:
     def __init__(self):
         self.contacts = []
 
-    def add_contact(self, name, phone, email):
-        if any(contact.phone == phone for contact in self.contacts):
-            print(f"A contact with the phone number '{phone}' already exists.")
-            return
-        confirm = input(f"Are you sure you want to add '{name}'? (y/n): ").lower()
-        if confirm == 'y':
-            new_contact = Contact(name, phone, email)
-            self.contacts.append(new_contact)
-            print(f"Contact '{name}' added successfully.")
-        else:
-            print("Contact addition canceled.")
-
     def view_contacts(self):
         if not self.contacts:
             print("No contacts to display.")
@@ -31,15 +19,6 @@ class ContactManager:
             for idx, contact in enumerate(self.contacts, start=1):
                 print(f"{idx}. {contact}")
             print("--------------------")
-
-    def search_contact(self, keyword):
-        found_contacts = [contact for contact in self.contacts if keyword.lower() in contact.name.lower() or keyword in contact.phone]
-        if found_contacts:
-            print("\nSearch results:")
-            for contact in found_contacts:
-                print(contact)
-        else:
-            print(f"No contacts found with keyword '{keyword}'.")
 
 def menu():
     cm = ContactManager()
@@ -53,15 +32,9 @@ def menu():
         choice = input("Choose an option (1-4): ")
 
         if choice == '1':
-            name = input("Enter name: ")
-            phone = input("Enter phone number: ")
-            email = input("Enter email address: ")
-            cm.add_contact(name, phone, email)
+
         elif choice == '2':
             cm.view_contacts()
-        elif choice == '3':
-            keyword = input("Enter name or phone number to search: ")
-            cm.search_contact(keyword)
         elif choice == '4':
             print("Exiting the Contact Manager. Goodbye!")
             break
