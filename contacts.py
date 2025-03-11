@@ -12,35 +12,30 @@ class ContactManager:
         self.contacts = []
 
     def add_contact(self, name, phone, email):
-        # Email validation added from branch2
+    # Email validation added from branch2
         if '@' not in email or '.' not in email:
             print("Invalid email address. Please provide a valid email.")
-            return
-        # Phone number validation from main
+        return
+    
+    # Phone number validation from main
         if not phone.isdigit():
             print("Phone number must contain only digits.")
-            return
-        # Duplicate phone check from main
+        return
+    
+    # Duplicate phone check from main
         if any(contact.phone == phone for contact in self.contacts):
             print(f"A contact with the phone number '{phone}' already exists.")
-            return
-        # Ask for confirmation before adding the contact (as in main)
-        confirm = input(f"Are you sure you want to add '{name}'? (y/n): ").lower()
-        if confirm == 'y':
-            new_contact = Contact(name, phone, email)
-            self.contacts.append(new_contact)
-            print(f"Contact '{name}' added successfully.")
-        else:
-            print("Contact addition canceled.")
+        return
+    
+    # Ask for confirmation before adding the contact (as in main)
+    confirm = input(f"Are you sure you want to add '{name}'? (y/n): ").lower()
+    if confirm == 'y':
+        new_contact = Contact(name, phone, email)
+        self.contacts.append(new_contact)
+        print(f"Contact '{name}' added successfully.")
+    else:
+        print("Contact addition canceled.")
 
-    def view_contacts(self):
-        if not self.contacts:
-            print("No contacts to display.")
-        else:
-            print("\n--- Contact List ---")
-            for idx, contact in enumerate(self.contacts, start=1):
-                print(f"{idx}. {contact}")
-            print("--------------------")
 
     def search_contact(self, keyword):
         found_contacts = [contact for contact in self.contacts 
