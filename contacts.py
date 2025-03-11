@@ -20,6 +20,16 @@ class ContactManager:
                 print(f"{idx}. {contact}")
             print("--------------------")
 
+    def search_contact(self, search_term):
+        results = [contact for contact in self.contacts if search_term.lower() in contact.name.lower()]
+        if results:
+            print("\n--- Search Results ---")
+            for idx, contact in enumerate(results, start=1):
+                print(f"{idx}. {contact}")
+            print("----------------------")
+        else:
+            print(f"No contacts found for '{search_term}'.")
+
 def menu():
     cm = ContactManager()
     while True:
@@ -35,6 +45,9 @@ def menu():
 
         elif choice == '2':
             cm.view_contacts()
+        elif choice == '3':
+            search_term = input("Enter the name to search: ")
+            cm.search_contact(search_term)
         elif choice == '4':
             print("Exiting the Contact Manager. Goodbye!")
             break
