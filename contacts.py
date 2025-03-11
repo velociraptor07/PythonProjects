@@ -11,6 +11,11 @@ class ContactManager:
     def __init__(self):
         self.contacts = []
 
+    def add_contact(self, name, phone, email):
+        new_contact = Contact(name, phone, email)
+        self.contacts.append(new_contact)
+        print(f"Contact {name} added successfully!")
+
     def view_contacts(self):
         if not self.contacts:
             print("No contacts to display.")
@@ -32,7 +37,10 @@ def menu():
         choice = input("Choose an option (1-4): ")
 
         if choice == '1':
-
+            name = input("Enter name: ")
+            phone = input("Enter phone number: ")
+            email = input("Enter email address: ")
+            cm.add_contact(name, phone, email)
         elif choice == '2':
             cm.view_contacts()
         elif choice == '4':
