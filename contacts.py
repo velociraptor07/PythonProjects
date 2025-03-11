@@ -14,13 +14,17 @@ class ContactManager:
     def add_contact(self, name, phone, email):
         if '@' not in email or '.' not in email:
             print("Invalid email address. Please provide a valid email.")
-            return
+        return
+        if not phone.isdigit():
+             print("Phone number must contain only digits.")
+             return
         if any(contact.phone == phone for contact in self.contacts):
             print(f"A contact with the phone number '{phone}' already exists.")
-            return
-        new_contact = Contact(name, phone, email)
-        self.contacts.append(new_contact)
-        print(f"Contact '{name}' added successfully.")
+        return
+    new_contact = Contact(name, phone, email)
+    self.contacts.append(new_contact)
+    print(f"Contact '{name}' added successfully.")
+
 
     def view_contacts(self):
         if not self.contacts:
