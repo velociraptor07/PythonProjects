@@ -15,13 +15,9 @@ class ContactManager:
         if any(contact.phone == phone for contact in self.contacts):
             print(f"A contact with the phone number '{phone}' already exists.")
             return
-        confirm = input(f"Are you sure you want to add '{name}'? (y/n): ").lower()
-        if confirm == 'y':
-            new_contact = Contact(name, phone, email)
-            self.contacts.append(new_contact)
-            print(f"Contact '{name}' added successfully.")
-        else:
-            print("Contact addition canceled.")
+        new_contact = Contact(name, phone, email)
+        self.contacts.append(new_contact)
+        print(f"Contact '{name}' added successfully.")
 
     def view_contacts(self):
         if not self.contacts:
@@ -41,16 +37,25 @@ class ContactManager:
         else:
             print(f"No contacts found with keyword '{keyword}'.")
 
+    def remove_contact(self, phone):
+        for contact in self.contacts:
+            if contact.phone == phone:
+                self.contacts.remove(contact)
+                print(f"Contact '{contact.name}' removed successfully.")
+                return
+        print(f"No contact found with phone number '{phone}'.")
+
 def menu():
     cm = ContactManager()
     while True:
-        print("\n*** Contact Manager ***")
-        print("1. Add New Contact")
-        print("2. View All Contacts")
-        print("3. Search for Contact")
-        print("4. Exit")
-        print("************************")
-        choice = input("Choose an option (1-4): ")
+        print("\n+++ Contact Management Menu +++")
+        print("1. Add Contact")
+        print("2. View Contacts")
+        print("3. Search Contact")
+        print("4. Remove Contact")
+        print("5. Exit")
+        print("+++++++++++++++++++++++++++++++")
+        choice = input("Choose an option (1-5): ")
 
         if choice == '1':
             name = input("Enter name: ")
@@ -63,10 +68,13 @@ def menu():
             keyword = input("Enter name or phone number to search: ")
             cm.search_contact(keyword)
         elif choice == '4':
-            print("Exiting the Contact Manager. Goodbye!")
+            phone = input("Enter the phone number of the contact to remove: ")
+            cm.remove_contact(phone)
+        elif choice == '5':
+            print("Thank you for using the Contact Manager. Goodbye!")
             break
         else:
-            print("Invalid option. Please try again.")
+            print("Invalid option. Please choose a number between 1 and 5.")
 
 if __name__ == "__main__":
     menu()
