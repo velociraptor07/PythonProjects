@@ -11,6 +11,18 @@ class ContactManager:
     def __init__(self):
         self.contacts = []
 
+    def add_contact(self, name, phone, email):
+        new_contact = Contact(name, phone, email)
+        self.contacts.append(new_contact)
+        print(f"Contact '{name}' added successfully.")
+
+    def delete_contact(self, index):
+        if 0 <= index < len(self.contacts):
+            deleted_contact = self.contacts.pop(index)
+            print(f"Contact '{deleted_contact.name}' has been deleted.")
+        else:
+            print("Invalid index. Contact not found.")
+
     def view_contacts(self):
         if not self.contacts:
             print("No contacts to display.")
@@ -38,11 +50,12 @@ def menu():
     while True:
         print("\n*** Contact Manager ***")
         print("1. Add New Contact")
-        print("2. View All Contacts")
-        print("3. Search for Contact")
-        print("4. Exit")
+        print("2. Delete Contact")
+        print("3. View All Contacts")
+        print("4. Search for Contact")
+        print("5. Exit")
         print("************************")
-        choice = input("Choose an option (1-4): ")
+        choice = input("Choose an option (1-5): ")
 
         if choice == '1':
             name = input("Enter name: ")
@@ -50,11 +63,18 @@ def menu():
             email = input("Enter email address: ")
             cm.add_contact(name, phone, email)
         elif choice == '2':
-            cm.view_contacts()
+            cm.view_contacts()  # Show contacts before deletion
+            try:
+                index = int(input("Enter the index of the contact to delete: ")) - 1
+                cm.delete_contact(index)
+            except ValueError:
+                print("Invalid input. Please enter a valid index.")
         elif choice == '3':
+            cm.view_contacts()
+        elif choice == '4':
             keyword = input("Enter name, phone number, or email to search: ")
             cm.search_contact(keyword)
-        elif choice == '4':
+        elif choice == '5':
             print("Exiting the Contact Manager. Goodbye!")
             break
         else:
