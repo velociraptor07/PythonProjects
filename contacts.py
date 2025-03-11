@@ -31,7 +31,7 @@ class ContactManager:
             for idx, contact in enumerate(self.contacts, start=1):
                 print(f"{idx}. {contact}")
             print("--------------------")
-
+    
     def search_contact(self, keyword):
         found_contacts = [contact for contact in self.contacts if keyword.lower() in contact.name.lower() or keyword in contact.phone]
         if found_contacts:
