@@ -35,6 +35,13 @@ class ContactManager:
         else:
             print(f"No contacts found for '{search_term}'.")
 
+    def delete_contact(self, index):
+        if 0 <= index < len(self.contacts):
+            removed_contact = self.contacts.pop(index)
+            print(f"Contact {removed_contact.name} deleted successfully!")
+        else:
+            print("Invalid index. No contact deleted.")
+
 def menu():
     cm = ContactManager()
     while True:
@@ -42,9 +49,10 @@ def menu():
         print("1. Add New Contact")
         print("2. View All Contacts")
         print("3. Search for Contact")
-        print("4. Exit")
+        print("4. Delete Contact")
+        print("5. Exit")
         print("************************")
-        choice = input("Choose an option (1-4): ")
+        choice = input("Choose an option (1-5): ")
 
         if choice == '1':
             name = input("Enter name: ")
@@ -57,6 +65,13 @@ def menu():
             search_term = input("Enter the name to search: ")
             cm.search_contact(search_term)
         elif choice == '4':
+            cm.view_contacts()
+            try:
+                index = int(input("Enter the number of the contact to delete: ")) - 1
+                cm.delete_contact(index)
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+        elif choice == '5':
             print("Exiting the Contact Manager. Goodbye!")
             break
         else:
