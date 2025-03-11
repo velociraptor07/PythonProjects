@@ -12,16 +12,6 @@ class ContactManager:
         self.contacts = []
 
     def add_contact(self, name, phone, email):
-
-        # Phone validation from main
-        if not phone.isdigit():
-            print("Phone number must contain only digits.")
-            return
-
-        # Check for duplicate phone numbers
-        if any(contact.phone == phone for contact in self.contacts):
-            print(f"A contact with the phone number '{phone}' already exists.")
-            return
         
         # Ask for confirmation before adding the contact
         confirm = input(f"Are you sure you want to add '{name}'? (y/n): ").lower()
