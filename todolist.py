@@ -1,16 +1,19 @@
+from datetime import datetime
+
 class Task:
-    def __init__(self, title, description, priority="Medium"):
+    def __init__(self, title, description, due_date=None):
         self.title = title
         self.description = description
         self.completed = False
-        self.priority = priority
+        self.due_date = due_date
 
     def mark_completed(self):
         self.completed = True
 
     def __str__(self):
         status = "Completed" if self.completed else "Pending"
-        return f"Task: {self.title}\nDescription: {self.description}\nPriority: {self.priority}\nStatus: {status}"
+        due_date_str = f"Due Date: {self.due_date.strftime('%Y-%m-%d')}" if self.due_date else "No due date"
+        return f"Task: {self.title}\nDescription: {self.description}\n{due_date_str}\nStatus: {status}"
 
 
 class ToDoList:
@@ -61,8 +64,9 @@ def main():
         if choice == "1":
             title = input("Enter the task title: ")
             description = input("Enter the task description: ")
-            priority = input("Enter task priority (Low/Medium/High): ").capitalize()
-            task = Task(title, description, priority)
+            due_date_str = input("Enter task due date (YYYY-MM-DD) or leave blank for no due date: ")
+            due_date = datetime.strptime(due_date_str, "%Y-%m-%d") if due_date_str else None
+            task = Task(title, description, due_date)
             todo_list.add_task(task)
         elif choice == "2":
             title = input("Enter the title of the task to remove: ")
