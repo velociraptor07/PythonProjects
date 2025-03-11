@@ -12,6 +12,10 @@ class ContactManager:
         self.contacts = []
 
     def add_contact(self, name, phone, email):
+        # Email validation from branch2
+        if '@' not in email or '.' not in email:
+            print("Invalid email address. Please provide a valid email.")
+            return
 
         # Phone validation from main
         if not phone.isdigit():
