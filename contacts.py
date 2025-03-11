@@ -11,21 +11,6 @@ class ContactManager:
     def __init__(self):
         self.contacts = []
 
-    def add_contact(self, name, phone, email):
-        if not phone.isdigit():
-            print("Phone number must contain only digits.")
-            return
-        if any(contact.phone == phone for contact in self.contacts):
-            print(f"A contact with the phone number '{phone}' already exists.")
-            return
-        confirm = input(f"Are you sure you want to add '{name}'? (y/n): ").lower()
-        if confirm == 'y':
-            new_contact = Contact(name, phone, email)
-            self.contacts.append(new_contact)
-            print(f"Contact '{name}' added successfully.")
-        else:
-            print("Contact addition canceled.")
-
     def view_contacts(self):
         if not self.contacts:
             print("No contacts to display.")
@@ -34,6 +19,7 @@ class ContactManager:
             for idx, contact in enumerate(self.contacts, start=1):
                 print(f"{idx}. {contact}")
             print("--------------------")
+            print(f"Total Contacts: {len(self.contacts)}")
 
     def search_contact(self, keyword):
         found_contacts = [contact for contact in self.contacts 
